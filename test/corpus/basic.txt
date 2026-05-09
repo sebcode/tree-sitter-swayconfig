@@ -1,0 +1,180 @@
+==================
+Variables
+==================
+
+set $mod Mod4
+set $term alacritty
+
+---
+
+(source_file
+  (set_statement
+    variable: (variable_name)
+    value: (value (identifier)))
+  (set_statement
+    variable: (variable_name)
+    value: (value (identifier))))
+
+==================
+Key bindings
+==================
+
+bindsym $mod+Return exec $term
+bindsym $mod+Shift+q kill
+
+---
+
+(source_file
+  (bindkey_statement
+    key: (key_combo)
+    exec: (command_string (variable_reference)))
+  (bindkey_statement
+    key: (key_combo)
+    exec: (command_string)))
+
+==================
+Output configuration
+==================
+
+output HDMI-A-1 mode 1920x1080 position 0 0
+output eDP-1 scale 1.5
+
+---
+
+(source_file
+  (output_statement
+    output: (identifier)
+    option: (output_option (value))
+    option: (output_option (value (number)) (value (number))))
+  (output_statement
+    output: (identifier)
+    option: (output_option (value (number)))))
+
+==================
+Comments
+==================
+
+# This is a comment
+set $mod Mod4  # inline comment
+
+---
+
+(source_file
+  (comment)
+  (set_statement
+    variable: (variable_name)
+    value: (value (identifier)))
+  (comment))
+
+==================
+For window rules
+==================
+
+for_window [class="Firefox"] floating enable
+for_window [app_id="pavucontrol"] floating enable
+
+---
+
+(source_file
+  (for_window_statement
+    criteria: (criteria
+      property: (criteria_property)
+      value: (string))
+    command: (command_string))
+  (for_window_statement
+    criteria: (criteria
+      property: (criteria_property)
+      value: (string))
+    command: (command_string)))
+
+==================
+Bar configuration
+==================
+
+bar {
+    status_command i3status
+    position top
+}
+
+---
+
+(source_file
+  (bar_block
+    (bar_statement (command_string))
+    (bar_statement)))
+
+==================
+Mode blocks
+==================
+
+mode "resize" {
+    bindsym Left resize shrink width 10 px
+    bindsym Return mode default
+}
+
+---
+
+(source_file
+  (mode_block
+    mode_name: (string)
+    (bindkey_statement
+      key: (key_combo)
+      exec: (command_string))
+    (bindkey_statement
+      key: (key_combo)
+      exec: (command_string))))
+
+==================
+Input configuration
+==================
+
+input "type:keyboard" {
+    xkb_layout de
+    xkb_variant nodeadkeys
+}
+
+---
+
+(source_file
+  (input_statement
+    device: (string)
+    (input_option (value (identifier)))
+    (input_option (value (identifier)))))
+
+==================
+Floating windows
+==================
+
+floating_minimum_size 75 x 50
+floating_maximum_size -1 x -1
+
+---
+
+(source_file
+  (floating_statement (value (number)) (value (number)))
+  (floating_statement (value (number)) (value (number))))
+
+==================
+Gaps
+==================
+
+gaps inner 10
+gaps outer 5
+
+---
+
+(source_file
+  (gaps_statement (value (number)))
+  (gaps_statement (value (number))))
+
+==================
+Client colors
+==================
+
+client.focused #4c7899 #285577 #ffffff #2e9ef4 #285577
+
+---
+
+(source_file
+  (client_color_statement
+    (color) (color) (color) (color) (color)))

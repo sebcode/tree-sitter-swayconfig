@@ -1,0 +1,35 @@
+{
+  "name": "tree-sitter-swayconfig",
+  "version": "1.0.0",
+  "description": "Tree-sitter parser for Sway window manager configuration files",
+  "main": "bindings/node",
+  "types": "bindings/node/index.d.ts",
+  "scripts": {
+    "build": "tree-sitter generate && node-gyp build",
+    "test": "tree-sitter test"
+  },
+  "keywords": [
+    "tree-sitter",
+    "sway",
+    "swayconfig",
+    "parser"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "node-addon-api": "^7.1.0",
+    "node-gyp": "^10.0.0"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.22.0"
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.swayconfig",
+      "file-types": [
+        "swayconfig",
+        "config"
+      ]
+    }
+  ]
+}

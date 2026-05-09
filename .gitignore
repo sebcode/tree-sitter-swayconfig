@@ -1,0 +1,11 @@
+build/
+node_modules/
+src/parser.c
+src/tree_sitter/
+*.o
+*.so
+*.node
+*.log
+.DS_Store
+Cargo.lock
+target/

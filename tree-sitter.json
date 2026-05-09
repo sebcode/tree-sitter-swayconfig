@@ -1,0 +1,14 @@
+{
+  "grammars": [
+    {
+      "name": "swayconfig",
+      "scope": "source.swayconfig",
+      "file-types": ["swayconfig", "config"],
+      "path": ".",
+      "highlights": ["queries/highlights.scm"]
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0"
+  }
+}
