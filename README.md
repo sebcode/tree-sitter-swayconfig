@@ -20,3 +20,58 @@ This is a Tree-sitter grammar for parsing Sway configuration files. It supports 
 - Gaps configuration
 - Focus behavior
 - Client colors
+
+## Usage in neovim with nvim-treesitter
+
+e.g. with lazy.nvim load config before treesitter:
+
+```lua
+-- Treesitter Configuration
+return function()
+  -- Load swayconfig parser
+  require('config.swayconfig')()
+
+  require('nvim-treesitter').install({
+  ...
+```
+
+`config/treesitter.lua`:
+
+```lua
+-- Swayconfig Tree-sitter Parser Configuration
+return function()
+  -- Register swayconfig parser with nvim-treesitter
+  vim.api.nvim_create_autocmd('User', {
+    pattern = 'TSUpdate',
+    callback = function()
+      local parsers = require('nvim-treesitter.parsers')
+
+      parsers.swayconfig = {
+        install_info = {
+          -- Local development path
+          -- path = vim.env.HOME .. '/dev/swayconfig-treesitter',
+          url = 'https://github.com/sebcode/tree-sitter-swayconfig',
+          revision = 'master',
+          generate = true,
+          files = { 'src/parser.c' },
+          queries = 'queries/swayconfig',
+        },
+        filetype = 'swayconfig',
+      }
+    end
+  })
+
+  -- Register filetype detection
+  vim.filetype.add({
+    pattern = {
+      ['.*/sway/config'] = 'swayconfig',
+      ['.*/sway/config%.d/.*'] = 'swayconfig',
+      ['.*/.config/sway/config'] = 'swayconfig',
+      ['.*/.config/sway/config%.d/.*'] = 'swayconfig',
+    },
+    filename = {
+      ['swayconfig'] = 'swayconfig',
+    },
+  })
+end
+```
